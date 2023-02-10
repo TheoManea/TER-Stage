@@ -10,9 +10,10 @@ public class Main {
 
         //reading my File
         ReadBrenda db = new ReadBrenda(s);
+        ReadBrenda db2 = new ReadBrenda(s);
         db.read("reaction");
-        db.testReactions(true);
-
-
+        db2.read("inhibition");
+        System.out.println("Il y a " + db.getNbreaction() + " réactions au total");
+        System.out.println("Il y a " + db2.getNbinhibition() + " inhibitions au total");
     }
 }

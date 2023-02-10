@@ -14,6 +14,7 @@ public class ReadBrenda {
      */
     private String filepath = "";
     private ArrayList<Reaction> reactionList = new ArrayList<Reaction>();
+    private ArrayList<Inhibition> inhibtionList = new ArrayList<Inhibition>();
     public ReadBrenda(String path){
             filepath = path;
     }
@@ -48,12 +49,11 @@ public class ReadBrenda {
                     case "reaction":
                         if(reactionTurn) {
                             reactionList.add(new Reaction(data));
-                            //System.out.println(data);
                         }
                         break;
                     case "inhibition":
                         if(!reactionTurn) {
-                            //System.out.println(data);
+                            inhibtionList.add(new Inhibition(data));
                         }
                         break;
                     case "plain":
@@ -68,8 +68,26 @@ public class ReadBrenda {
             e.printStackTrace();
         }
     }
+    public int getNbreaction(){
+        int i = 0;
+        for(Reaction r : reactionList){
+            if(r.correctlyFormatted())
+                i++;
+        }
+        return i;
+    }
+
+    public int getNbinhibition(){
+        int j = 0;
+        for(Inhibition i : inhibtionList){
+            if(i.correctlyFormatted())
+                j++;
+        }
+        return j;
+    }
     public void testReactions(boolean infoMode){
         if(getReactionList().size() == 0){
+            System.out.println("La liste des réactions est vide.\n Génération...");
             getReactionList();
             testReactions(infoMode);
         }
@@ -85,21 +103,50 @@ public class ReadBrenda {
                 else if(!correct && infoMode )
                     errorLine.add(nbReactions);
             }
-            System.out.println("Nombres de lignes correctes " + nbLinesWellFormated);
-            System.out.println("Nombres de lignes incorrectes " + (nbReactions - nbLinesWellFormated));
+            System.out.println("Nombres de lignes \"réaction\" correctes " + nbLinesWellFormated);
+            System.out.println("Nombres de lignes \"réaction\" incorrectes " + (nbReactions - nbLinesWellFormated));
             if(infoMode){
                 StringBuilder sb = new StringBuilder();
                 for (Integer number : errorLine) {
                     int shift = number+2;
                     sb.append(shift + " ");
                 }
-                System.out.println("Lignes erronés : "+ sb);
+                System.out.println("Lignes \"réaction\" erronés : "+ sb);
             }
 
         }
     }
-    public ArrayList<Reaction> getReactionList(){
-        return reactionList;
+    public void testInhibitions(boolean infoMode){
+        if (getInhibitionList().size() == 0) {
+            System.out.println("La liste des inhibitions est vide.\n Génération...");
+            getInhibitionList();
+            testInhibitions(infoMode);
+        }
+        else{
+            ArrayList<Integer> errorLine = new ArrayList<>();
+            int nbInhibition = 0;
+            int nbLinesWellFormated = 0;
+            for(Inhibition i : inhibtionList){
+                nbInhibition++;
+                boolean correct = i.correctlyFormatted();
+                if(correct)
+                    nbLinesWellFormated++;
+                else if(!correct && infoMode )
+                    errorLine.add(nbInhibition);
+            }
+            System.out.println("Nombres de lignes \"inhibition\" correctes " + nbLinesWellFormated);
+            System.out.println("Nombres de lignes \"inhibition\" incorrectes " + (nbInhibition - nbLinesWellFormated));
+            if(infoMode){
+                StringBuilder sb = new StringBuilder();
+                for (Integer number : errorLine) {
+                    int shift = number+2;
+                    sb.append(shift + " ");
+                }
+                System.out.println("Lignes \"inhibition\" erronés : "+ sb);
+            }
+        }
     }
+    public ArrayList<Reaction> getReactionList(){ return reactionList; }
+    public ArrayList<Inhibition> getInhibitionList() { return inhibtionList; }
 
 }
