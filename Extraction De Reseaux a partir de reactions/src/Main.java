@@ -13,7 +13,7 @@ public class Main {
         ReadBrenda db2 = new ReadBrenda(s);
         db.read("reaction");
         db2.read("inhibition");
-        System.out.println("Il y a " + db.getNbreaction() + " réactions au total");
-        System.out.println("Il y a " + db2.getNbinhibition() + " inhibitions au total");
+        db.testReactions(true);
+        db2.testInhibitions(true);
     }
 }
