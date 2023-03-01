@@ -62,5 +62,26 @@ public class ReadBrenda {
         }
     }
 
+    public int getNbreaction(){
+        int i = 0;
+        for(Reaction r : reactionList){
+            if(r.correctlyFormatted())
+                i++;
+        }
+        return i;
+    }
+
+    public int getNbinhibition(){
+        int j = 0;
+        for(Inhibition i : inhibitionList){
+            if(i.correctlyFormatted())
+                j++;
+        }
+        return j;
+    }
+
+
+    public ArrayList<Reaction> getReactionList(){ return reactionList; }
+    public ArrayList<Inhibition> getInhibitionList() { return inhibitionList; }
 
 }

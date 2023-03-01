@@ -21,13 +21,20 @@ public class Reaction {
      * d'assigner les valeurs aux attributs
      **/
     public void setAttributes(){
-        String[] twoPoints = line.split(":");
-        nomEnzyme = twoPoints[0];
-        String[] arrow = twoPoints[1].split("->");
-        substrats = arrow[0].split("\\+");
-        String[] vertical = arrow[1].split("\\|");
-        produits = vertical[0].split("\\+");
-        data = vertical[1].split(",");
+        System.out.println(line);
+        try {
+            String[] twoPoints = line.split(":");
+            nomEnzyme = twoPoints[0];
+            String[] arrow = twoPoints[1].split("->");
+            substrats = arrow[0].split("\\+");
+            String[] vertical = arrow[1].split("\\|");
+            produits = vertical[0].split("\\+");
+            //data = vertical[1].split("\\|"); // cette ligne ne marche pas lol
+        }
+        catch (Exception e){
+            System.out.println("Erreur dans l'attribution des paramètres");
+        }
+
     }
     public boolean correctlyFormatted(){
         return Pattern.matches(regex,line);
