@@ -18,13 +18,28 @@ public class SearchReaction {
     public void setEndingPoint(String endingPoint){
         this.endingPoint = endingPoint;
     }
-
-    public boolean existStartingPoint(){
-        for(int i = 0; i < 20; i++){
-            System.out.println("Ligne n°" + i);
-            reactionList.get(i).setAttributes();
+    public void settingReactionAttributes(){
+        for(Reaction r : reactionList){
+            r.setAttributes();
         }
+    }
+    public boolean existStartingPoint(){
+        for(Reaction r : reactionList){
+            for(String sub : r.getSubstrats()){
+                if(sub.equals(startingPoint))
+                    return true;
+            }
+        }
+        return false;
+    }
 
+    public boolean existEndingPoint(){
+        for(Reaction r : reactionList){
+            for(String sub : r.getProduits()){
+                if(sub.equals(endingPoint))
+                    return true;
+            }
+        }
         return false;
     }
 }

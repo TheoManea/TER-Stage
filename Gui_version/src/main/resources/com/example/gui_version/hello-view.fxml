@@ -9,24 +9,24 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui_version.Controller">
    <children>
-      <Button fx:id="reactionButton" disable="true" layoutX="42.0" layoutY="175.0" mnemonicParsing="false" onAction="#loadReactions" prefHeight="30.0" prefWidth="121.0" text="Load reactions" />
-      <Button fx:id="inhibitionButton" disable="true" layoutX="42.0" layoutY="215.0" mnemonicParsing="false" onAction="#loadInhibitions" prefHeight="30.0" prefWidth="121.0" text="Load inhibitions" />
-      <Label layoutX="75.0" layoutY="57.0" text="Actions" />
-      <Label layoutX="300.0" layoutY="57.0" text="Status" />
-      <Label layoutX="242.0" layoutY="181.0" text="Reactions loaded :" />
-      <Label layoutX="242.0" layoutY="219.0" text="Inhibitions loaded : " />
-      <Label fx:id="reactionsStatus" layoutX="373.0" layoutY="179.0" text="No" textFill="RED" />
-      <Label fx:id="inhibitionsStatus" layoutX="373.0" layoutY="219.0" text="No" textFill="RED" />
-      <Button layoutX="43.0" layoutY="89.0" mnemonicParsing="false" onAction="#fileChooser" prefHeight="30.0" prefWidth="121.0" text="Pick File" />
-      <Text layoutX="242.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File path defined :" />
-      <Text fx:id="filepathStatus" fill="RED" layoutX="373.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No" />
-      <Text fx:id="pathLabel" layoutX="44.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Path :" />
+      <Button fx:id="reactionButton" disable="true" layoutX="311.0" layoutY="148.0" mnemonicParsing="false" onAction="#loadReactions" prefHeight="30.0" prefWidth="121.0" text="Load reactions" />
+      <Button fx:id="inhibitionButton" disable="true" layoutX="311.0" layoutY="188.0" mnemonicParsing="false" onAction="#loadInhibitions" prefHeight="30.0" prefWidth="121.0" text="Load inhibitions" />
+      <Label layoutX="344.0" layoutY="30.0" text="Actions" />
+      <Label layoutX="569.0" layoutY="30.0" text="Status" />
+      <Label layoutX="510.0" layoutY="154.0" text="Reactions loaded :" />
+      <Label layoutX="511.0" layoutY="192.0" text="Inhibitions loaded : " />
+      <Label fx:id="reactionsStatus" layoutX="642.0" layoutY="152.0" text="No" textFill="RED" />
+      <Label fx:id="inhibitionsStatus" layoutX="642.0" layoutY="192.0" text="No" textFill="RED" />
+      <Button layoutX="312.0" layoutY="62.0" mnemonicParsing="false" onAction="#fileChooser" prefHeight="30.0" prefWidth="121.0" text="Pick File" />
+      <Text layoutX="510.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File path defined :" />
+      <Text fx:id="filepathStatus" fill="RED" layoutX="642.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No" />
+      <Text fx:id="pathLabel" layoutX="313.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Path :" />
       <TextArea fx:id="logsEntry" editable="false" layoutX="4.0" layoutY="494.0" prefHeight="171.0" prefWidth="962.0" />
-      <Label layoutX="658.0" layoutY="57.0" text="Search for reactions path" />
-      <Label layoutX="550.0" layoutY="91.0" text="Starting Reaction :" />
-      <Label layoutX="550.0" layoutY="181.0" text="Ending Reaction :" />
-      <TextField fx:id="startReactionEntry" layoutX="682.0" layoutY="89.0" />
-      <TextField fx:id="endReactionEntry" layoutX="682.0" layoutY="178.0" />
-      <Button layoutX="702.0" layoutY="256.0" mnemonicParsing="false" onAction="#searchReactionPath" text="Search" />
+      <Label layoutX="414.0" layoutY="279.0" text="Search for reactions path" />
+      <Label layoutX="305.0" layoutY="331.0" text="Starting Reaction :" />
+      <Label layoutX="306.0" layoutY="379.0" text="Ending Reaction :" />
+      <TextField fx:id="startReactionEntry" layoutX="438.0" layoutY="321.0" />
+      <TextField fx:id="endReactionEntry" layoutX="438.0" layoutY="369.0" />
+      <Button layoutX="458.0" layoutY="454.0" mnemonicParsing="false" onAction="#searchReactionPath" text="Search" />
    </children>
 </AnchorPane>

@@ -1,18 +1,21 @@
 package com.example.gui_version;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reaction {
-    private String line = "";
+    private String lineRaw;
+    private String line;
     private String nomEnzyme = "";
-    private String[] substrats;
-    private String[] produits;
-    private String[] data;
+    private ArrayList<String> substrats = new ArrayList<>();
+    private ArrayList<String> produits = new ArrayList<>();
     private String regex = "(\"(.*?)\"(\\s)(\\:))((\\s)(\".*?\")(\\s)((\\+)*))(->)((\\s)(\".*?\")(\\s)((\\+)*))(\\|)";
 
 
     public Reaction(String initialLine){
         line = initialLine.split("(?<=\\|)")[0];
+        lineRaw = initialLine;
     }
 
     /**
@@ -21,23 +24,45 @@ public class Reaction {
      * d'assigner les valeurs aux attributs
      **/
     public void setAttributes(){
-        System.out.println(line);
-        try {
-            String[] twoPoints = line.split(":");
-            nomEnzyme = twoPoints[0];
-            String[] arrow = twoPoints[1].split("->");
-            substrats = arrow[0].split("\\+");
-            String[] vertical = arrow[1].split("\\|");
-            produits = vertical[0].split("\\+");
-            //data = vertical[1].split("\\|"); // cette ligne ne marche pas lol
+        try{
+            // here we are sure that it is correctly formatted
+            String[] arrow = line.split(" -> ");
+            //isolate text between quotes in a List
+            ArrayList<String> textBetweenQuotes = new ArrayList<>();
+            Pattern p = Pattern.compile("\"([^\"]*)\"");
+            Matcher m = p.matcher(line);
+            while (m.find()) {
+                textBetweenQuotes.add(m.group(1));
+            }
+            //name is the first element in the list
+            nomEnzyme = textBetweenQuotes.get(0);
+            //finding products after the arrow
+            m = p.matcher(arrow[1]);
+            while (m.find()) {
+                produits.add(m.group(1));
+            }
+            //finding substrat
+            for(String s : textBetweenQuotes){
+                if(s.equals(nomEnzyme))
+                    ;
+                else if(s.equals(produits.get(0)))
+                    break;
+                else
+                    substrats.add(s);
+            }
         }
         catch (Exception e){
-            System.out.println("Erreur dans l'attribution des paramètres");
+            System.out.println("Error on " + lineRaw);
         }
 
     }
     public boolean correctlyFormatted(){
         return Pattern.matches(regex,line);
+    }
+    public void printAttributes(){
+        System.out.println("    Nom : " + nomEnzyme);
+        System.out.println("    Substrat : " + String.join(", ", substrats));
+        System.out.println("    Produits : " + String.join(", ", produits));
     }
     public String getLine() {
         return line;
@@ -47,18 +72,11 @@ public class Reaction {
         return nomEnzyme;
     }
 
-    public String[] getSubstrats() {
+    public ArrayList<String> getSubstrats() {
         return substrats;
     }
 
-    public String[] getProduits() {
+    public ArrayList<String> getProduits() {
         return produits;
     }
-
-    public String[] getData() {
-        return data;
-    }
-
-
-
 }

@@ -61,7 +61,9 @@ public class ReadBrenda {
             e.printStackTrace();
         }
     }
+    public void settingReactionAttributes(){
 
+    }
     public int getNbreaction(){
         int i = 0;
         for(Reaction r : reactionList){

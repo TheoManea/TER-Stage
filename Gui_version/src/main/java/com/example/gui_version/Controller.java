@@ -15,7 +15,6 @@ public class Controller {
     private String filePath = "";
     @FXML
     private TextField endReactionEntry;
-
     @FXML
     private Text filepathStatus;
 
@@ -100,19 +99,28 @@ public class Controller {
         }
         else{
             SearchReaction searchEngine = new SearchReaction(reactionDb.getReactionList(),inhibitionDb.getInhibitionList());
+            searchEngine.settingReactionAttributes();
+            printLog(Color.BLACK,"\n>>>>> Attributes for reactions have been setted ");
             searchEngine.setStartingPoint(startingPoint);
             searchEngine.setEndingPoint(endingPoint);
-            printLog(Color.BLACK,"\n>>>>> Recherche de chemin du type : \"" + startingPoint + "\" -> ... -> \"" + endingPoint + "\"");
+            printLog(Color.BLACK,"\n>>>>> Looking for a path of type : \"" + startingPoint + "\" -> ... -> \"" + endingPoint + "\"");
 
-            searchEngine.existStartingPoint();
+            if(!searchEngine.existStartingPoint())
+                printLog(Color.BLACK,"\n>>>>> The initial chems is not in the database ...");
 
-            /*if(!searchEngine.existStartingPoint())
-                printLog(Color.BLACK,"\nLe réactif initial n'apparaît pas ...");*/
+            if(!searchEngine.existEndingPoint())
+                printLog(Color.BLACK,"\n>>>>> The final product is not present in the database...");
+
+            if(searchEngine.existStartingPoint() && searchEngine.existEndingPoint())
+                printLog(Color.BLACK,"\n>>>>> The path is theoretically possible !");
+
+
 
         }
 
 
     }
+
 
     void printLog(Color color, String text){
         logsEntry.appendText(text);
